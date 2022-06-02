@@ -6,7 +6,14 @@ import {
   selectRepetitions,
 } from "../../store/exercises/selectors";
 import { fetchExercises, fetchRepetitions } from "../../store/exercises/thunk";
-import { Grid, Button } from "@mui/material";
+import {
+  Grid,
+  Button,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+} from "@mui/material";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -54,18 +61,34 @@ export default function Homepage() {
         {!exercises.length ? (
           "Loading"
         ) : (
-          <Grid item direction="row" xs={7}>
-            <Grid item direction="column">
+          <Grid item direction="row" xs={7} columnSpacing={2} rowSpacing={2}>
+            <Card sx={{ maxWidth: "370px" }}>
               <Grid item>
-                <p>{exercises[exercId].name}</p>
-                <img src={exercises[exercId].gifUrl} alt="exercise"></img>
+                <CardContent>
+                  <Typography variant="h6">
+                    {/* {exercises[exercId].name} */}
+                    3/4 sit-up
+                  </Typography>
+                </CardContent>
+                <CardMedia
+                  // image={exercises[exercId].gifUrl}
+                  image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
+                  // alt={exercises.name}
+                  alt="exercise"
+                  sx={{
+                    maxHeight: "360px",
+                    maxWidth: "360px",
+                    minHeight: "360px",
+                    minWidth: "360px",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                ></CardMedia>
               </Grid>
-            </Grid>
-            <Grid item direction="column">
-              <Grid item>
-                <p>{repetitions[repsId].time}</p>
-              </Grid>
-            </Grid>
+            </Card>
+            <Card sx={{ maxWidth: "370px", mt: "20px" }}>
+              <CardContent>{repetitions[repsId].time}</CardContent>
+            </Card>
           </Grid>
         )}
       </Grid>

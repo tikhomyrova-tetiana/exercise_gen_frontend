@@ -1,9 +1,11 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GoogleIcon from "@mui/icons-material/Google";
 
 function Copyright() {
   return (
@@ -24,25 +26,25 @@ export default function Footer() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
+        alignItems: "center",
+        minHeight: { xs: "70vh", md: "70vh" },
+        maxHeight: { xs: "80vh", md: "80vh" },
       }}
     >
-      <CssBaseline />
       <Box
         component="footer"
         sx={{
           py: 3,
           px: 2,
           mt: "auto",
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[200]
-              : theme.palette.grey[800],
+          backgroundColor: "primary",
         }}
       >
-        <Container maxWidth="sm">
-          <Typography variant="body1">Footer</Typography>
+        <Container maxWidth="sm" direction="row">
           <Copyright />
+          <InstagramIcon />
+          <TwitterIcon />
+          <GoogleIcon />
         </Container>
       </Box>
     </Box>
