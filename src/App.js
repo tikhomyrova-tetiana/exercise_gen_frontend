@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/SignUp/Signup";
 import Login from "./pages/Login";
 
 import { useDispatch, useSelector } from "react-redux";
