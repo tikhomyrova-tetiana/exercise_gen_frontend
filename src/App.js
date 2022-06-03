@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp/Signup";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -15,6 +15,7 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import MainPage from "./pages/MainPage/MainPage";
 import Footer from "./components/Footer/Footer";
 import { Container } from "@mui/system";
+import Profile from "./pages/Profile/Profile";
 const Other = () => <h1>Other</h1>;
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/other" element={<Other />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Container>
       <Footer />
