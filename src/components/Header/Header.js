@@ -1,7 +1,17 @@
-import { AppBar, Toolbar, Typography, Button, Link } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Link,
+  createTheme,
+} from "@mui/material";
 import SportsGymnasticsIcon from "@mui/icons-material/SportsGymnastics";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/user/selectors";
+import LoggedIn from "../../components/Navigation/LoggedIn";
+import LoggedOut from "../../components/Navigation/LoggedOut";
 
 const theme = createTheme({
   palette: {
@@ -15,6 +25,10 @@ const theme = createTheme({
 });
 
 function Header() {
+  const token = useSelector(selectToken);
+
+  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+
   return (
     <AppBar position="static" theme={theme}>
       <Toolbar>
@@ -44,16 +58,7 @@ function Header() {
         <Button color="inherit">
           <DarkModeIcon />
         </Button>
-        <Button color="inherit">
-          <Link href="/login" color="inherit" underline="none">
-            Login
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link href="/signup" color="inherit" underline="none">
-            Sign up
-          </Link>
-        </Button>
+        {loginLogoutControls}
       </Toolbar>
     </AppBar>
   );
