@@ -32,7 +32,7 @@ function Header() {
   return (
     <AppBar position="static" theme={theme}>
       <Toolbar>
-        <SportsGymnasticsIcon />
+        <SportsGymnasticsIcon sx={{ flexGrow: 1 }} />
         <Typography variant="h5" component="span" sx={{ flexGrow: 1 }}>
           <Link
             href="/"
@@ -42,7 +42,7 @@ function Header() {
             hover="none"
           >
             {" "}
-            Fitness dice{" "}
+            Exercise Gen{" "}
           </Link>
         </Typography>
         <Button color="inherit">

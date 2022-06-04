@@ -1,6 +1,11 @@
 import axios from "axios";
 import { appDoneLoading, appLoading } from "../appState/slice";
-import { exercisesFetched, repetitionFetched } from "./slice";
+import {
+  exercisesFetched,
+  repetitionFetched,
+  addFavourites,
+  favouritesFetched,
+} from "./slice";
 
 export async function fetchExercises(dispatch, getState) {
   try {
@@ -31,3 +36,34 @@ export async function fetchRepetitions(dispatch, getState) {
     dispatch(appDoneLoading());
   }
 }
+
+export async function fetchFavourites(dispatch, getState) {
+  try {
+    dispatch(appLoading());
+    const response = await axios.get(
+      "http://localhost:4000/exercises/favourites"
+    );
+    console.log("fav", response);
+    const favourites = response.data;
+    dispatch(favouritesFetched(favourites));
+    dispatch(appDoneLoading());
+  } catch (error) {
+    console.log(error.message);
+    dispatch(appDoneLoading());
+  }
+}
+
+export const addUserExercise = (exerciseId) => async (dispatch, getState) => {
+  try {
+    dispatch(appLoading());
+    const userFav = await axios.post(
+      "http://localhost:4000/exercises/favourites",
+      { exerciseId }
+    );
+    dispatch(addFavourites(userFav.data));
+    dispatch(appDoneLoading());
+  } catch (error) {
+    console.log(error.message);
+    dispatch(appDoneLoading());
+  }
+};

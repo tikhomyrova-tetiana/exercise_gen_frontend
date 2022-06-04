@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { selectToken } from "../../store/user/selectors";
 import {
   selectExercises,
   selectRepetitions,
 } from "../../store/exercises/selectors";
-import { fetchExercises, fetchRepetitions } from "../../store/exercises/thunk";
+import {
+  fetchExercises,
+  fetchRepetitions,
+  addUserExercise,
+  fetchFavourites,
+} from "../../store/exercises/thunk";
 import {
   Grid,
   Button,
@@ -14,11 +20,13 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const exercises = useSelector(selectExercises);
   const repetitions = useSelector(selectRepetitions);
+  const token = useSelector(selectToken);
   console.log(exercises.length);
   console.log("reps", repetitions);
 
@@ -45,6 +53,19 @@ export default function Homepage() {
   const [exercId, setExercId] = useState(0);
   const [repsId, setRepsId] = useState(0);
 
+  const onClickLike = (event) => {
+    event.preventDefault();
+    dispatch(fetchFavourites);
+    dispatch(addUserExercise(exercises[exercId].id));
+  };
+  const addFavourites = token ? (
+    <Button color="primary" onClick={onClickLike}>
+      Add to favourites <FavoriteIcon />
+    </Button>
+  ) : null;
+
+  // console.log(exercises[exercId].id);
+
   return (
     <Grid container>
       <Grid container columnSpacing={{ xs: 1 }} direction="row" xs={12}>
@@ -66,15 +87,15 @@ export default function Homepage() {
               <Grid item>
                 <CardContent>
                   <Typography variant="h6">
-                    {/* {exercises[exercId].name} */}
-                    3/4 sit-up
+                    {exercises[exercId].name}
+                    {/* 3/4 sit-up */}
                   </Typography>
                 </CardContent>
                 <CardMedia
-                  // image={exercises[exercId].gifUrl}
-                  image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
-                  // alt={exercises.name}
-                  alt="exercise"
+                  image={exercises[exercId].gifUrl}
+                  // image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
+                  alt={exercises.name}
+                  // alt="exercise"
                   sx={{
                     maxHeight: "360px",
                     maxWidth: "360px",
@@ -87,12 +108,13 @@ export default function Homepage() {
               </Grid>
             </Card>
             <Card sx={{ maxWidth: "370px", mt: "20px" }}>
-              <CardContent>{repetitions[repsId].time}</CardContent>
+              <CardContent>{repetitions[repsId]?.time}</CardContent>
             </Card>
           </Grid>
         )}
       </Grid>
       <Grid container>
+        {addFavourites}
         <Button variant="outlined" onClick={onClick}>
           Generate
         </Button>

@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   exercises: [],
   repetition: [],
+  favourites: [],
 };
 
 export const exerciseSlice = createSlice({
@@ -21,10 +22,22 @@ export const exerciseSlice = createSlice({
       state.repetition = action.payload;
       state.loading = false;
     },
+    favouritesFetched: (state, action) => {
+      state.favourites = action.payload;
+      state.loading = false;
+    },
+    addFavourites: (state, action) => {
+      state.favourites = [...state.favourites, action.payload];
+    },
   },
 });
 
-export const { startLoading, exercisesFetched, repetitionFetched } =
-  exerciseSlice.actions;
+export const {
+  startLoading,
+  exercisesFetched,
+  repetitionFetched,
+  favouritesFetched,
+  addFavourites,
+} = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

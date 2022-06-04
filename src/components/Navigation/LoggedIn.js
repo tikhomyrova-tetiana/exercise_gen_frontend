@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../store/user/slice";
 import { selectUser } from "../../store/user/selectors";
 import Nav from "react-bootstrap/Nav";
-import { Button, Link, createTheme } from "@mui/material";
+import { Button, Link, createTheme, IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const theme = createTheme({
   palette: {
@@ -28,7 +29,11 @@ export default function LoggedIn() {
         </Link>
       </Button>
       <Nav.Item style={{ padding: ".5rem 1rem" }}>{user?.name}</Nav.Item>
-      <Avatar alt="photo" src={user?.photo} />
+
+      <Avatar alt="photo" src={user?.photo}></Avatar>
+      <IconButton color="inherit">
+        <ArrowDropDownIcon />
+      </IconButton>
     </>
   );
 }
