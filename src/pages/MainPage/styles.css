@@ -1,0 +1,59 @@
+.page {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: baseline;
+  width: max-content;
+  flex-wrap: wrap;
+  margin: 100px auto;
+  padding: 0;
+}
+
+.mainpart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.genpart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.exerciseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.firstcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.secondcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text h5 {
+  color: #00695c;
+}
+
+.text p {
+  color: #00897b;
+  /* align: center; */
+}

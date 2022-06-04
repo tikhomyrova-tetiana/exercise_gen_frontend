@@ -32,7 +32,7 @@ function Header() {
   return (
     <AppBar position="static" theme={theme}>
       <Toolbar>
-        <SportsGymnasticsIcon sx={{ flexGrow: 1 }} />
+        <SportsGymnasticsIcon mr="20px" />
         <Typography variant="h5" component="span" sx={{ flexGrow: 1 }}>
           <Link
             href="/"

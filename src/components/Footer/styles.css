@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100px;
+  justify-content: space-evenly;
+  margin-left: 20px;
+}

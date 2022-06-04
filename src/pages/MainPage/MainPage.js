@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { selectToken } from "../../store/user/selectors";
@@ -21,6 +22,22 @@ import {
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@emotion/react";
+
+const theme = createTheme({
+  status: {
+    danger: "#e53e3e",
+  },
+  palette: {
+    primary: {
+      main: "#00695c",
+    },
+    secondary: {
+      main: "#004d40",
+    },
+  },
+});
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -59,66 +76,80 @@ export default function Homepage() {
     dispatch(addUserExercise(exercises[exercId].id));
   };
   const addFavourites = token ? (
-    <Button color="primary" onClick={onClickLike}>
-      Add to favourites <FavoriteIcon />
-    </Button>
+    <ThemeProvider theme={theme}>
+      <Button color="primary" onClick={onClickLike}>
+        Add to favourites <FavoriteIcon />
+      </Button>
+    </ThemeProvider>
   ) : null;
 
   // console.log(exercises[exercId].id);
 
   return (
-    <Grid container>
-      <Grid container columnSpacing={{ xs: 1 }} direction="row" xs={12}>
-        <Grid item mr="50px" direction="column" xs={3}>
-          <Grid item variant="h6">
-            Generate an exercise
-          </Grid>
-          <Grid item variant="span">
-            text text text text text text text text text text text text text
-            text text text{" "}
-          </Grid>
-        </Grid>
+    <div className="page">
+      <div className="mainpart">
+        <div className="text">
+          <h5>WELCOME to Exercise Gen!</h5>
+          <p align="center">
+            For fitness lovers of all levels. Generate random exercises or a
+            complete workout to make your fitness training more interesting.
+            Create an account for a better experience and expanded
+            functionality.
+          </p>
+        </div>
 
         {!exercises.length ? (
           "Loading"
         ) : (
-          <Grid item direction="row" xs={7} columnSpacing={2} rowSpacing={2}>
-            <Card sx={{ maxWidth: "370px" }}>
-              <Grid item>
-                <CardContent>
-                  <Typography variant="h6">
-                    {exercises[exercId].name}
-                    {/* 3/4 sit-up */}
+          <div className="genpart">
+            <div className="firstcolumn">
+              <div>
+                <div className="exerciseInfo">
+                  <CardContent>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        {exercises[exercId].name}
+                        {/* 3/4 sit-up */}
+                      </Typography>
+                    </ThemeProvider>
+                  </CardContent>
+                  <CardMedia
+                    image={exercises[exercId].gifUrl}
+                    // image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
+                    alt={exercises.name}
+                    // alt="exercise"
+                    sx={{
+                      maxHeight: "360px",
+                      maxWidth: "360px",
+                      minHeight: "360px",
+                      minWidth: "360px",
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  ></CardMedia>
+                </div>
+              </div>
+              {addFavourites}
+            </div>
+            <div className="secondcolumn">
+              <Grid item sx={{ maxWidth: "370px" }}>
+                <ThemeProvider theme={theme}>
+                  <Typography variant="h3" color="secondary">
+                    <CardContent>{repetitions[repsId]?.time}</CardContent>
                   </Typography>
-                </CardContent>
-                <CardMedia
-                  image={exercises[exercId].gifUrl}
-                  // image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
-                  alt={exercises.name}
-                  // alt="exercise"
-                  sx={{
-                    maxHeight: "360px",
-                    maxWidth: "360px",
-                    minHeight: "360px",
-                    minWidth: "360px",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                ></CardMedia>
+                </ThemeProvider>
               </Grid>
-            </Card>
-            <Card sx={{ maxWidth: "370px", mt: "20px" }}>
-              <CardContent>{repetitions[repsId]?.time}</CardContent>
-            </Card>
-          </Grid>
+              <div>
+                <ThemeProvider theme={theme}>
+                  <Button color="primary" variant="outlined" onClick={onClick}>
+                    Generate
+                  </Button>
+                </ThemeProvider>
+              </div>
+            </div>
+          </div>
         )}
-      </Grid>
-      <Grid container>
-        {addFavourites}
-        <Button variant="outlined" onClick={onClick}>
-          Generate
-        </Button>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }
