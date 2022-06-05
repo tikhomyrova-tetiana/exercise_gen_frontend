@@ -14,6 +14,7 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import MainPage from "./pages/MainPage/MainPage";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
+import Workout from "./pages/Workout/Workout";
 const Other = () => <h1>Other</h1>;
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/workout" element={<Workout />} />
       </Routes>
       <Footer />
     </div>

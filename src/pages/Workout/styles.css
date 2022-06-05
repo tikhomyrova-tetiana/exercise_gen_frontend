@@ -1,0 +1,13 @@
+.cards {
+  display: flex;
+  flex-direction: row;
+}
+
+.pageworkout {
+  display: flex;
+  align-items: baseline;
+  width: max-content;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  padding: 0;
+}
