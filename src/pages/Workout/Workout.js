@@ -69,7 +69,12 @@ export default function Workout() {
   const [backExercId, setBackExercId] = useState(0);
   const [chestExercId, setChestExercId] = useState(0);
   const [cardioExercId, setCardioExercId] = useState(0);
-  const [repsId, setRepsId] = useState(0);
+  const [reps1Id, setReps1Id] = useState(0);
+  const [reps2Id, setReps2Id] = useState(0);
+  const [reps3Id, setReps3Id] = useState(0);
+  const [reps4Id, setReps4Id] = useState(0);
+  const [reps5Id, setReps5Id] = useState(0);
+  const [reps6Id, setReps6Id] = useState(0);
 
   //This is the necessary step to fetch the data and put it in the Redux store.
   useEffect(() => {
@@ -119,7 +124,12 @@ export default function Workout() {
     setBackExercId(diceBackExer);
     setChestExercId(diceChestExer);
     setCardioExercId(diceCardioExer);
-    setRepsId(diceTime);
+    setReps1Id(diceTime);
+    setReps2Id(diceTime);
+    setReps3Id(diceTime);
+    setReps4Id(diceTime);
+    setReps5Id(diceTime);
+    setReps6Id(diceTime);
   };
 
   //   const onClickLike = (event) => {
@@ -149,8 +159,8 @@ export default function Workout() {
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {arms[armsExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {arms[armsExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -160,18 +170,25 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps1Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {legs[legsExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {legs[legsExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -181,18 +198,25 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps2Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {waist[waistExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {waist[waistExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -202,20 +226,27 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps3Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
               </div>
               <div className="cards">
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {back[backExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {back[backExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -225,18 +256,25 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps4Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {chest[chestExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {chest[chestExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -246,18 +284,25 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps5Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
                 <div className="exerciseInfo">
                   <CardContent>
                     <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        {cardio[cardioExercId].name}
+                      <Typography variant="p" color="secondary">
+                        {cardio[cardioExercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -267,31 +312,29 @@ export default function Workout() {
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",
-                      minHeight: "300px",
-                      minWidth: "300px",
+                      minHeight: "250px",
+                      minWidth: "250px",
                       height: "100%",
                       width: "100%",
                     }}
                   ></CardMedia>
+                  <Grid item sx={{ maxWidth: "370px" }}>
+                    <ThemeProvider theme={theme}>
+                      <Typography variant="h6" color="secondary">
+                        <CardContent>{repetitions[reps6Id]?.time}</CardContent>
+                      </Typography>
+                    </ThemeProvider>
+                  </Grid>
                 </div>
               </div>
               {/* {addFavourites} */}
             </div>
             <div className="secondcolumn">
-              <Grid item sx={{ maxWidth: "370px" }}>
-                <ThemeProvider theme={theme}>
-                  <Typography variant="h4" color="secondary">
-                    <CardContent>{repetitions[repsId]?.time}</CardContent>
-                  </Typography>
-                </ThemeProvider>
-              </Grid>
-              <div>
-                <ThemeProvider theme={theme}>
-                  <Button color="primary" variant="outlined" onClick={onClick}>
-                    Generate
-                  </Button>
-                </ThemeProvider>
-              </div>
+              <ThemeProvider theme={theme}>
+                <Button color="primary" variant="outlined" onClick={onClick}>
+                  Generate
+                </Button>
+              </ThemeProvider>
             </div>
           </div>
         )}

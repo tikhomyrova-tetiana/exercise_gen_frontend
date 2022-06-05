@@ -1,3 +1,7 @@
+.body {
+  min-height: 90vh;
+}
+
 @media (max-width: 1200px) {
   .container {
     max-width: 970px;

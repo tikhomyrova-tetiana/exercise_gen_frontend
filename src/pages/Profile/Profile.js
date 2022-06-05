@@ -15,6 +15,7 @@ import {
   OutlinedInput,
   TextField,
   Button,
+  // AlertTitle,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -63,11 +64,50 @@ export default function Profile() {
     setGender(event.target.value);
   };
 
+  // Cloudinary part  image, if we already have one??
+  const [image, setImage] = useState();
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    //first parameter is always upload_preset, second is the name of the preset
+    data.append("upload_preset", "lpsty2kc");
+
+    //post request to Cloudinary, remember to change to your own link
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/delvoxvyc/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const file = await res.json();
+    console.log("file", file); //check if you are getting the url back
+    setImage(file.url); //put the url in local state, next step you can send it to the backend
+  };
+  // Cloudinary part
+
   return (
     <div className="profilePage">
       <div className="photo">
-        <Img alt="userphoto" src={user?.photo} />
-        <Button>Upload</Button>
+        <Img
+          alt="userphoto"
+          src={
+            user?.photo
+              ? user?.photo
+              : "https://i0.wp.com/i.pinimg.com/474x/58/f2/de/58f2de50bad0fb24c24d4757841d57c4.jpg"
+          }
+        />
+        {/* {user?.photo ? (
+          <AlertTitle style={{ fontSize: 20 }}>
+            Succesfully uploaded!
+          </AlertTitle>
+        ) : (
+          ""
+        )} */}
+        <Button onClick={uploadImage}>Upload</Button>
       </div>
       <div>
         <div className="info">
@@ -100,6 +140,7 @@ export default function Profile() {
             Age {user?.age}
             <Link>change</Link>
           </InputLabel>
+
           <TextField
             id="outlined-textarea"
             label="Date of birth"

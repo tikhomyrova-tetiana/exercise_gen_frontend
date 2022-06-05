@@ -27,17 +27,19 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <MessageBox />
-      {isLoading ? <Loading /> : null}
-      <Routes>
-        <Route exact path="/" element={<MainPage />} />
-        <Route path="/other" element={<Other />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/workout" element={<Workout />} />
-      </Routes>
+      <div className="body">
+        <Header />
+        <MessageBox />
+        {isLoading ? <Loading /> : null}
+        <Routes>
+          <Route exact path="/" element={<MainPage />} />
+          <Route path="/other" element={<Other />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/workout" element={<Workout />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

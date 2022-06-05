@@ -19,10 +19,12 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Link,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import Workout from "../Workout/Workout";
 
 const theme = createTheme({
   status: {
@@ -84,17 +86,34 @@ export default function Homepage() {
 
   // console.log(exercises[exercId].id);
 
+  const workout = token ? (
+    <ThemeProvider theme={theme}>
+      <Button color="primary">
+        <Link href="/workout" underline="none">
+          Generate an entire workout
+        </Link>
+      </Button>
+    </ThemeProvider>
+  ) : null;
+
   return (
     <div className="page">
       <div className="mainpart">
         <div className="text">
           <h5>WELCOME to Exercise Gen!</h5>
+          <p></p>
           <p align="center">
             For fitness lovers of all levels. Generate random exercises or a
             complete workout to make your fitness training more interesting.
-            Create an account for a better experience and expanded
-            functionality.
+            <p></p>
+            <ThemeProvider theme={theme}>
+              <Typography color="primary">
+                <Link> Create an account</Link>
+              </Typography>
+            </ThemeProvider>{" "}
+            for a better experience and expanded functionality.
           </p>
+          {workout}
         </div>
 
         {!exercises.length ? (
