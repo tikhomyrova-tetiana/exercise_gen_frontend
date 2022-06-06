@@ -57,3 +57,13 @@
   color: #00897b;
   /* align: center; */
 }
+
+.custom-link:hover {
+  color: #00695c;
+  text-decoration-color: #00695c;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}

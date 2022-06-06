@@ -24,7 +24,6 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
-import Workout from "../Workout/Workout";
 
 const theme = createTheme({
   status: {
@@ -33,6 +32,11 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#00695c",
+      // hover: {
+      //   "&:hover": {
+      //     background: "#00695c",
+      //   },
+      // },
     },
     secondary: {
       main: "#004d40",
@@ -89,7 +93,7 @@ export default function Homepage() {
   const workout = token ? (
     <ThemeProvider theme={theme}>
       <Button color="primary">
-        <Link href="/workout" underline="none">
+        <Link href="/workout" underline="none" className="custom-link">
           Generate an entire workout
         </Link>
       </Button>
@@ -108,7 +112,7 @@ export default function Homepage() {
             <p></p>
             <ThemeProvider theme={theme}>
               <Typography color="primary">
-                <Link> Create an account</Link>
+                <Link className="custom-link"> Create an account</Link>
               </Typography>
             </ThemeProvider>{" "}
             for a better experience and expanded functionality.

@@ -24,7 +24,13 @@ export default function LoggedIn() {
   return (
     <>
       <Button color="inherit" onClick={() => dispatch(logOut())}>
-        <Link href="/login" color="inherit" underline="none" theme={theme}>
+        <Link
+          href="/login"
+          color="inherit"
+          underline="none"
+          theme={theme}
+          className="custom-link"
+        >
           Logout
         </Link>
       </Button>

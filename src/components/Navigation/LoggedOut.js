@@ -16,12 +16,23 @@ export default function LoggedOut() {
   return (
     <>
       <Button color="inherit">
-        <Link href="/login" color="inherit" underline="none" theme={theme}>
+        <Link
+          href="/login"
+          color="inherit"
+          underline="none"
+          theme={theme}
+          className="custom-link"
+        >
           Login
         </Link>
       </Button>
       <Button color="inherit">
-        <Link href="/signup" color="inherit" underline="none">
+        <Link
+          href="/signup"
+          color="inherit"
+          underline="none"
+          className="custom-link"
+        >
           Sign up
         </Link>
       </Button>

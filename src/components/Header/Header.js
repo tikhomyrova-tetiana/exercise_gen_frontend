@@ -31,34 +31,52 @@ function Header() {
 
   return (
     <AppBar position="static" theme={theme}>
-      <Toolbar>
-        <SportsGymnasticsIcon mr="20px" />
-        <Typography variant="h5" component="span" sx={{ flexGrow: 1 }}>
-          <Link
-            href="/"
-            color="inherit"
-            underline="none"
-            variant="h5"
-            hover="none"
-          >
-            {" "}
-            Exercise Gen{" "}
-          </Link>
-        </Typography>
-        <Button color="inherit">
-          <Link href="/" color="inherit" underline="none" theme={theme}>
-            Home
-          </Link>
-        </Button>
-        <Button color="inherit" sx={{ flexGrow: 1 }}>
-          <Link href="/other" color="inherit" underline="none">
-            Learn more
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <DarkModeIcon />
-        </Button>
-        {loginLogoutControls}
+      <Toolbar className="header">
+        <div>
+          <SportsGymnasticsIcon viewBox="0 0 24 30" fontSize="large" />
+          <Typography variant="h5" component="span">
+            <Link
+              href="/"
+              color="inherit"
+              underline="none"
+              variant="h5"
+              hover="none"
+              className="custom-link"
+            >
+              {" "}
+              Exercise Gen{" "}
+            </Link>
+          </Typography>
+        </div>
+        <div>
+          <Button color="inherit">
+            <Link
+              href="/"
+              color="inherit"
+              underline="none"
+              theme={theme}
+              className="custom-link"
+            >
+              Home
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link
+              href="/other"
+              color="inherit"
+              underline="none"
+              className="custom-link"
+            >
+              Learn more
+            </Link>
+          </Button>
+        </div>
+        <div>
+          <Button color="inherit">
+            <DarkModeIcon />
+          </Button>
+          {loginLogoutControls}
+        </div>
       </Toolbar>
     </AppBar>
   );

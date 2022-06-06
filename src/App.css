@@ -18,3 +18,8 @@
     max-width: none;
   }
 }
+
+.custom-link:hover {
+  color: #00695c;
+  text-decoration-color: #00695c;
+}
