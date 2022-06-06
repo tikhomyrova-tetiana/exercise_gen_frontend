@@ -35,10 +35,10 @@ export default function LoggedIn() {
         </Link>
       </Button>
       <Nav.Item style={{ padding: ".5rem 1rem" }}>{user?.name}</Nav.Item>
-      <Avatar alt="photo" src={user?.photo}></Avatar>
-      <IconButton color="inherit">
-        <ArrowDropDownIcon />
-      </IconButton>
+      <Link href="/profile">
+        <Avatar alt="photo" src={user?.photo}></Avatar>
+      </Link>
+      <IconButton color="inherit"></IconButton>
     </div>
   );
 }
