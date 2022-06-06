@@ -23,3 +23,12 @@
   color: #00695c;
   text-decoration-color: #00695c;
 }
+
+.loggedin {
+  display: flex;
+  flex-direction: row;
+}
+
+h3 {
+  text-decoration-color: #00695c;
+}

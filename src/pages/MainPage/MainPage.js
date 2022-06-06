@@ -32,11 +32,6 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#00695c",
-      // hover: {
-      //   "&:hover": {
-      //     background: "#00695c",
-      //   },
-      // },
     },
     secondary: {
       main: "#004d40",
@@ -112,7 +107,10 @@ export default function Homepage() {
             <p></p>
             <ThemeProvider theme={theme}>
               <Typography color="primary">
-                <Link className="custom-link"> Create an account</Link>
+                <Link href="/signup" className="custom-link">
+                  {" "}
+                  Create an account
+                </Link>
               </Typography>
             </ThemeProvider>{" "}
             for a better experience and expanded functionality.

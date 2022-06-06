@@ -71,7 +71,7 @@ function Header() {
             </Link>
           </Button>
         </div>
-        <div>
+        <div className="loggedin">
           <Button color="inherit">
             <DarkModeIcon />
           </Button>

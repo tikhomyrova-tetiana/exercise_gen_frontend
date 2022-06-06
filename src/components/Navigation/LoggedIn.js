@@ -22,7 +22,7 @@ export default function LoggedIn() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   return (
-    <>
+    <div className="loggedin">
       <Button color="inherit" onClick={() => dispatch(logOut())}>
         <Link
           href="/login"
@@ -35,11 +35,10 @@ export default function LoggedIn() {
         </Link>
       </Button>
       <Nav.Item style={{ padding: ".5rem 1rem" }}>{user?.name}</Nav.Item>
-
       <Avatar alt="photo" src={user?.photo}></Avatar>
       <IconButton color="inherit">
         <ArrowDropDownIcon />
       </IconButton>
-    </>
+    </div>
   );
 }

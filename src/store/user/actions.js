@@ -3,7 +3,7 @@ import axios from "axios";
 import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/actions";
-import { loginSuccess, logOut, tokenStillValid } from "./slice";
+import { loginSuccess, logOut, tokenStillValid, updateUserInfo } from "./slice";
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -116,3 +116,21 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
+
+export const updateUser =
+  (id, name, email, age, gender) => async (dispatch, getState) => {
+    try {
+      dispatch(appLoading());
+      const response = await axios.patch(`${apiUrl}/users/${id}`, {
+        name,
+        email,
+        age,
+        gender,
+      });
+      dispatch(updateUserInfo(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log(error.message);
+      dispatch(appDoneLoading());
+    }
+  };
