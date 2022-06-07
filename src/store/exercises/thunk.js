@@ -53,12 +53,19 @@ export async function fetchFavourites(dispatch, getState) {
   }
 }
 
-export const addUserExercise = (exerciseId) => async (dispatch, getState) => {
+export const addUserExercise = (apiId) => async (dispatch, getState) => {
   try {
+    const { token } = getState().user;
     dispatch(appLoading());
     const userFav = await axios.post(
       "http://localhost:4000/exercises/favourites",
-      { exerciseId }
+      { apiId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      // add Auth headers (token)
     );
     dispatch(addFavourites(userFav.data));
     dispatch(appDoneLoading());

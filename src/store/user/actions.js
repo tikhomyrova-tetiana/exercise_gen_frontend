@@ -118,12 +118,13 @@ export const getUserWithStoredToken = () => {
 };
 
 export const updateUser =
-  (id, name, email, age, gender) => async (dispatch, getState) => {
+  (id, name, email, age, gender, password) => async (dispatch, getState) => {
     try {
       dispatch(appLoading());
       const response = await axios.patch(`${apiUrl}/users/${id}`, {
         name,
         email,
+        password,
         age,
         gender,
       });

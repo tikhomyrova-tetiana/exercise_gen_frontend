@@ -83,7 +83,7 @@ export default function Homepage() {
     </ThemeProvider>
   ) : null;
 
-  // console.log(exercises[exercId].id);
+  console.log(exercises[exercId].id);
 
   const workout = token ? (
     <ThemeProvider theme={theme}>
@@ -129,15 +129,12 @@ export default function Homepage() {
                     <ThemeProvider theme={theme}>
                       <Typography variant="h6" color="secondary">
                         {exercises[exercId].name}
-                        {/* 3/4 sit-up */}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
                   <CardMedia
                     image={exercises[exercId].gifUrl}
-                    // image="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
                     alt={exercises.name}
-                    // alt="exercise"
                     sx={{
                       maxHeight: "360px",
                       maxWidth: "360px",

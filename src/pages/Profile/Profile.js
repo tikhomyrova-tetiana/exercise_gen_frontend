@@ -53,6 +53,7 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
   const genders = [{ value: "female" }, { value: "male" }, { value: "other" }];
 
   useEffect(() => {
@@ -93,29 +94,31 @@ export default function Profile() {
         name !== "" ? name : user?.name,
         email !== "" ? email : user?.email,
         age !== "" ? age : user?.age,
-        gender !== "" ? gender : user?.gender
+        gender !== "" ? gender : user?.gender,
+        password !== "" ? password : null
       )
     );
     setName("");
     setEmail("");
     setAge("");
     setGender("");
+    setPassword("");
   };
 
   // Cloudinary part  image, if we already have one??
-  // const [image, setImage] = useState("");
+  // const [photo, setPhoto] = useState("");
   // фото может не быть?
 
   const uploadImage = async (e) => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
-    //first parameter is always upload_preset, second is the name of the preset
-    data.append("upload_preset", "lpsty2kc");
+    //first parameter is always upload_preset, second is the name of the preset from your clooudinary website
+    data.append("upload_preset", "c1xpd3rm");
 
-    //post request to Cloudinary, remember to change to your own link
+    //post request to Cloudinary, remember to change to your own link, dwpyp7i9h - cloud name
     const res = await fetch(
-      "https://api.cloudinary.com/v1_1/delvoxvyc/image/upload",
+      "https://api.cloudinary.com/v1_1/dwpyp7i9h/image/upload",
       {
         method: "POST",
         body: data,
@@ -148,9 +151,10 @@ export default function Profile() {
         )} */}
         <ThemeProvider theme={theme}>
           <Button
-            onClick={uploadImage}
+            // onClick={uploadImage}
             className="custom-link"
             color="secondary"
+            type="file"
           >
             Upload
           </Button>
@@ -212,9 +216,9 @@ export default function Profile() {
             <OutlinedInput
               id="outlined-adornment-password"
               type={values.showPassword ? "text" : "password"}
-              value={values.password}
+              value={password}
               size="small"
-              onChange={handleChange("password")}
+              onChange={(e) => setPassword(e.target.value)}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
