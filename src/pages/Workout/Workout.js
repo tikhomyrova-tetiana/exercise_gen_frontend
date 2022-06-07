@@ -55,13 +55,13 @@ export default function Workout() {
   const cardio = useSelector(selectCardioExercise);
   const repetitions = useSelector(selectRepetitions);
   //   const token = useSelector(selectToken);
-  console.log(exercises.length);
-  console.log("arms", arms);
-  console.log("legs", legs);
-  console.log("back", back);
-  console.log("waist", waist);
-  console.log("chest", chest);
-  console.log("cardio", cardio);
+  // console.log(exercises.length);
+  // console.log("arms", arms);
+  // console.log("legs", legs);
+  // console.log("back", back);
+  // console.log("waist", waist);
+  // console.log("chest", chest);
+  // console.log("cardio", cardio);
 
   const [legsExercId, setLegsExercId] = useState(0);
   const [armsExercId, setArmsExercId] = useState(0);
@@ -162,6 +162,13 @@ export default function Workout() {
                       <Typography variant="p" color="secondary">
                         {arms[armsExercId].name.toUpperCase()}
                       </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {arms[armsExercId].bodyPart}
+                      </Typography>
                     </ThemeProvider>
                   </CardContent>
                   <CardMedia
@@ -190,6 +197,13 @@ export default function Workout() {
                       <Typography variant="p" color="secondary">
                         {legs[legsExercId].name.toUpperCase()}
                       </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {legs[legsExercId].bodyPart}
+                      </Typography>
                     </ThemeProvider>
                   </CardContent>
                   <CardMedia
@@ -217,6 +231,13 @@ export default function Workout() {
                     <ThemeProvider theme={theme}>
                       <Typography variant="p" color="secondary">
                         {waist[waistExercId].name.toUpperCase()}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {waist[waistExercId].bodyPart}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>
@@ -248,6 +269,13 @@ export default function Workout() {
                       <Typography variant="p" color="secondary">
                         {back[backExercId].name.toUpperCase()}
                       </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {back[backExercId].bodyPart}
+                      </Typography>
                     </ThemeProvider>
                   </CardContent>
                   <CardMedia
@@ -276,6 +304,13 @@ export default function Workout() {
                       <Typography variant="p" color="secondary">
                         {chest[chestExercId].name.toUpperCase()}
                       </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {chest[chestExercId].bodyPart}
+                      </Typography>
                     </ThemeProvider>
                   </CardContent>
                   <CardMedia
@@ -303,6 +338,13 @@ export default function Workout() {
                     <ThemeProvider theme={theme}>
                       <Typography variant="p" color="secondary">
                         {cardio[cardioExercId].name.toUpperCase()}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="secondary"
+                        align="center"
+                      >
+                        {cardio[cardioExercId].bodyPart}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>

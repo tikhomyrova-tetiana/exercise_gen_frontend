@@ -83,7 +83,7 @@ export default function Homepage() {
     </ThemeProvider>
   ) : null;
 
-  console.log(exercises[exercId].id);
+  // console.log(exercises[exercId].id);
 
   const workout = token ? (
     <ThemeProvider theme={theme}>
@@ -113,6 +113,15 @@ export default function Homepage() {
                 </Link>
               </Typography>
             </ThemeProvider>{" "}
+            or
+            <ThemeProvider theme={theme}>
+              <Typography color="primary">
+                <Link href="/login" className="custom-link">
+                  {" "}
+                  Log in
+                </Link>
+              </Typography>
+            </ThemeProvider>{" "}
             for a better experience and expanded functionality.
           </p>
           {workout}
@@ -128,7 +137,7 @@ export default function Homepage() {
                   <CardContent>
                     <ThemeProvider theme={theme}>
                       <Typography variant="h6" color="secondary">
-                        {exercises[exercId].name}
+                        {exercises[exercId].name.toUpperCase()}
                       </Typography>
                     </ThemeProvider>
                   </CardContent>

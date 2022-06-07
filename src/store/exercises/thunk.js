@@ -39,9 +39,13 @@ export async function fetchRepetitions(dispatch, getState) {
 
 export async function fetchFavourites(dispatch, getState) {
   try {
+    const { token } = getState().user;
     dispatch(appLoading());
     const response = await axios.get(
-      "http://localhost:4000/exercises/favourites"
+      "http://localhost:4000/exercises/favourites",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     console.log("fav", response);
     const favourites = response.data;

@@ -3,6 +3,10 @@ import { styled } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { selectToken } from "../../store/user/selectors";
+import {
+  selectExercises,
+  selectUserExercises,
+} from "../../store/exercises/selectors";
 import { useNavigate } from "react-router";
 import "./styles.css";
 import {
@@ -15,13 +19,18 @@ import {
   OutlinedInput,
   TextField,
   Button,
+  CardContent,
+  Typography,
+  CardMedia,
   // AlertTitle,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ThemeProvider } from "@emotion/react";
-import { updateUser } from "../../store/user/actions";
+import { updateUser, updateUserPhoto } from "../../store/user/actions";
+import { fetchFavourites, fetchExercises } from "../../store/exercises/thunk";
+import axios from "axios";
 
 const Img = styled("img")({
   margin: "auto",
@@ -47,6 +56,8 @@ const theme = createTheme({
 export default function Profile() {
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
+  const favourites = useSelector(selectUserExercises);
+  const exercises = useSelector(selectExercises);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -55,11 +66,31 @@ export default function Profile() {
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
   const genders = [{ value: "female" }, { value: "male" }, { value: "other" }];
+  console.log("bahjbajbak", favourites);
+
+  // const arr1 = [4, 6, 8, 3, 8];
+  // const arr2 = [5, 9, 3, 5, 7];
+  // const compare = (arr1, arr2) => {
+  //   const final = [];
+  //   arr1.forEach((e1) =>
+  //     arr2.forEach((e2) => {
+  //       if (e1 === e2) {
+  //         final.push(e1);
+  //       }
+  //     })
+  //   );
+  //   return final;
+  // };
+  // console.log(compare(arr1, arr2));
 
   useEffect(() => {
     if (!token) navigate("/");
-  }, [token, navigate]);
+    dispatch(fetchFavourites) && dispatch(fetchExercises);
+  }, [token, navigate, dispatch]);
 
+  // const handleChange = (prop) => (event) => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
   const [values, setValues] = useState({
     amount: "",
     password: "",
@@ -67,11 +98,6 @@ export default function Profile() {
     weightRange: "",
     showPassword: false,
   });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -105,9 +131,11 @@ export default function Profile() {
     setPassword("");
   };
 
-  // Cloudinary part  image, if we already have one??
-  // const [photo, setPhoto] = useState("");
-  // фото может не быть?
+  // Cloudinary part  image,
+  const [image, setImage] = useState("");
+  const Input = styled("input")({
+    display: "none",
+  });
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -124,10 +152,13 @@ export default function Profile() {
         body: data,
       }
     );
+    // we can use Axios(first import it) request instead of Fetch
+    // axios.post("https://api.cloudinary.com/v1_1/dwpyp7i9h/image/upload", data);
 
     const file = await res.json();
     console.log("file", file); //check if you are getting the url back
-    // setImage(file.url); //put the url in local state, next step you can send it to the backend
+    setImage(file.url); //put the url in local state, next step you can send it to the backend
+    dispatch(updateUserPhoto(user?.id, image));
   };
   // Cloudinary part
 
@@ -139,25 +170,24 @@ export default function Profile() {
           src={
             user?.photo
               ? user?.photo
+              : image
+              ? image
               : "https://i0.wp.com/i.pinimg.com/474x/58/f2/de/58f2de50bad0fb24c24d4757841d57c4.jpg"
           }
         />
-        {/* {user?.photo ? (
-          <AlertTitle style={{ fontSize: 20 }}>
-            Succesfully uploaded!
-          </AlertTitle>
-        ) : (
-          ""
-        )} */}
         <ThemeProvider theme={theme}>
-          <Button
-            // onClick={uploadImage}
-            className="custom-link"
-            color="secondary"
-            type="file"
-          >
-            Upload
-          </Button>
+          <label htmlFor="contained-button-file">
+            <Input
+              accept="image/*"
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={uploadImage}
+            />
+            <Button variant="outlined" component="span">
+              Upload
+            </Button>
+          </label>
         </ThemeProvider>
       </div>
       <div>
@@ -192,7 +222,7 @@ export default function Profile() {
             multiline
             size="small"
             value={age}
-            onChange={(e) => setAge(e.target.value)}
+            onChange={(e) => setAge(parseInt(e.target.value))}
           ></TextField>
           <InputLabel>Gender: {user?.gender}</InputLabel>
           <TextField
@@ -217,7 +247,7 @@ export default function Profile() {
               id="outlined-adornment-password"
               type={values.showPassword ? "text" : "password"}
               value={password}
-              size="small"
+              size="medium"
               onChange={(e) => setPassword(e.target.value)}
               endAdornment={
                 <InputAdornment position="end">
@@ -247,6 +277,34 @@ export default function Profile() {
         <div>
           <h3>Favourites</h3>
         </div>
+
+        {!favourites.length
+          ? "You didn't like any exercise"
+          : favourites.map((ex) => (
+              // <div className="exerciseInfo">
+              //   <CardContent>
+              //     <ThemeProvider theme={theme}>
+              //       <Typography variant="h6" color="secondary">
+              //         {ex.name}
+              //       </Typography>
+              //     </ThemeProvider>
+              //   </CardContent>
+              //   <CardMedia
+              //     image={ex.gifUrl}
+              //     alt="name"
+              //     sx={{
+              //       maxHeight: "360px",
+              //       maxWidth: "360px",
+              //       minHeight: "360px",
+              //       minWidth: "360px",
+              //       height: "100%",
+              //       width: "100%",
+              //     }}
+              //   ></CardMedia>
+              // </div>
+              <p>{ex}</p>
+            ))}
+
         <div>
           <h3>Statistics</h3>
         </div>
