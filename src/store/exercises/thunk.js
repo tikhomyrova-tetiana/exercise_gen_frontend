@@ -41,6 +41,8 @@ export async function fetchFavourites(dispatch, getState) {
   try {
     const { token } = getState().user;
     dispatch(appLoading());
+
+    //getting the favourites from backend
     const response = await axios.get(
       "http://localhost:4000/exercises/favourites",
       {
@@ -49,7 +51,33 @@ export async function fetchFavourites(dispatch, getState) {
     );
     console.log("fav", response);
     const favourites = response.data;
-    dispatch(favouritesFetched(favourites));
+
+    //getting the whole favourites object from the API using the id's only
+    const favoritesArray = await Promise.all(
+      favourites.map(async (item) => {
+        const getObject = await axios.get(
+          `https://exercisedb.p.rapidapi.com/exercises/exercise/${item.exercise.apiId}`,
+          {
+            headers: {
+              "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+              "X-RapidAPI-Key":
+                "d067087cb5msh916566a37810f52p163719jsnf04db4e1577b",
+            },
+          }
+        );
+        return getObject;
+      })
+    );
+
+    console.log("test", favoritesArray);
+
+    //conver the favourites array to only have the data we are interested in
+    const relevantData = favoritesArray.map((item) => item.data);
+    console.log("relevant", relevantData);
+
+    // axios.all(favourites.get)
+
+    dispatch(favouritesFetched(relevantData));
     dispatch(appDoneLoading());
   } catch (error) {
     console.log(error.message);

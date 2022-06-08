@@ -49,4 +49,4 @@ export const selectCardioExercise = (reduxState) => {
 };
 
 export const selectUserExercises = (reduxState) =>
-  reduxState.exercises.favourites.map((ex) => ex.exercise).map((e) => e.apiId);
+  reduxState.exercises.favourites;
