@@ -130,3 +130,26 @@ export const addUserExercise = (apiId) => async (dispatch, getState) => {
     dispatch(appDoneLoading());
   }
 };
+
+export const addCompletedExercise =
+  (apiId, name, bodyPart) => async (dispatch, getState) => {
+    try {
+      const { token } = getState().user;
+      dispatch(appLoading());
+      const completed = await axios.post(
+        "http://localhost:4000/exercises/completed",
+        { apiId, name, bodyPart },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+        // add Auth headers (token)
+      );
+      dispatch(addCompleted(completed.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log(error.message);
+      dispatch(appDoneLoading());
+    }
+  };

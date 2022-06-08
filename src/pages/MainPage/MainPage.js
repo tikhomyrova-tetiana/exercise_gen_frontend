@@ -12,6 +12,8 @@ import {
   fetchRepetitions,
   addUserExercise,
   fetchFavourites,
+  fetchCompleted,
+  addCompletedExercise,
 } from "../../store/exercises/thunk";
 import {
   Grid,
@@ -76,6 +78,17 @@ export default function Homepage() {
     dispatch(fetchFavourites);
     dispatch(addUserExercise(exercises[exercId].id));
   };
+  const onClickDone = (event) => {
+    event.preventDefault();
+    dispatch(fetchCompleted);
+    dispatch(
+      addCompletedExercise(
+        exercises[exercId].id,
+        exercises[exercId].name,
+        exercises[exercId].bodyPart
+      )
+    );
+  };
   const addFavourites = token ? (
     <div className="buttons">
       <ThemeProvider theme={theme}>
@@ -84,7 +97,7 @@ export default function Homepage() {
         </Button>
       </ThemeProvider>
       <ThemeProvider theme={theme}>
-        <Button color="primary" onClick={onClickLike}>
+        <Button color="primary" onClick={onClickDone}>
           Done <CheckCircleIcon />
         </Button>
       </ThemeProvider>
