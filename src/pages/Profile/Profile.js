@@ -7,6 +7,12 @@ import { selectToken } from "../../store/user/selectors";
 import {
   selectUserExercises,
   selectCompletedExercises,
+  selectCompletedArms,
+  selectCompletedBack,
+  selectCompletedCardio,
+  selectCompletedChest,
+  selectCompletedLegs,
+  selectCompletedWaist,
 } from "../../store/exercises/selectors";
 import { useNavigate } from "react-router";
 import "./styles.css";
@@ -55,6 +61,12 @@ export default function Profile() {
   const token = useSelector(selectToken);
   const favourites = useSelector(selectUserExercises);
   const completed = useSelector(selectCompletedExercises);
+  const arms = useSelector(selectCompletedArms);
+  const legs = useSelector(selectCompletedLegs);
+  const waist = useSelector(selectCompletedWaist);
+  const cardio = useSelector(selectCompletedCardio);
+  const back = useSelector(selectCompletedBack);
+  const chest = useSelector(selectCompletedChest);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -64,6 +76,8 @@ export default function Profile() {
   // const [password, setPassword] = useState("");
   const genders = [{ value: "female" }, { value: "male" }, { value: "other" }];
   console.log("bahjbajbak", favourites);
+  console.log("completed", completed);
+  console.log(arms, legs, waist, back, chest, cardio);
 
   useEffect(() => {
     if (!token) navigate("/");
@@ -304,6 +318,39 @@ export default function Profile() {
                 </CardContent>
               </div>
             ))}
+        {!completed.length ? null : (
+          <div>
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Typography variant="h6" color="secondary">
+                  Arms exercises completed {arms} -{" "}
+                  {Math.round((arms / completed.length) * 100)} %
+                </Typography>
+                <Typography variant="h6" color="secondary">
+                  Legs exercises completed {legs} -{" "}
+                  {Math.round((legs / completed.length) * 100)} %
+                </Typography>
+                <Typography variant="h6" color="secondary">
+                  Chest exercises completed {chest} -{" "}
+                  {Math.round((chest / completed.length) * 100)} %
+                </Typography>
+
+                <Typography variant="h6" color="secondary">
+                  Back exercises completed {back} -{" "}
+                  {Math.round((back / completed.length) * 100)} %
+                </Typography>
+                <Typography variant="h6" color="secondary">
+                  Waist exercises completed {waist} -{" "}
+                  {Math.round((waist / completed.length) * 100)} %
+                </Typography>
+                <Typography variant="h6" color="secondary">
+                  Cardio exercises completed {cardio} -{" "}
+                  {Math.round((cardio / completed.length) * 100)} %
+                </Typography>
+              </ThemeProvider>
+            </CardContent>
+          </div>
+        )}
       </div>
     </div>
   );

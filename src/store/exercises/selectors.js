@@ -53,3 +53,78 @@ export const selectUserExercises = (reduxState) =>
 
 export const selectCompletedExercises = (reduxState) =>
   reduxState.exercises.completed;
+
+export const selectCompletedArms = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const arms = completed.filter(
+      (e) =>
+        e.bodyPart === "upper arms" ||
+        e.bodyPart === "lower arms" ||
+        e.bodyPart === "shoulders"
+    ).length;
+    return arms;
+  }
+  return;
+};
+
+export const selectCompletedLegs = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const legs = completed.filter(
+      (e) => e.bodyPart === "upper legs" || e.bodyPart === "lower legs"
+    ).length;
+    return legs;
+  }
+  return;
+};
+
+export const selectCompletedBack = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const back = completed.filter(
+      (e) => e.bodyPart === "back" || e.bodyPart === "neck"
+    ).length;
+    return back;
+  }
+  return;
+};
+
+export const selectCompletedWaist = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const waist = completed.filter((e) => e.bodyPart === "waist").length;
+    return waist;
+  }
+  return;
+};
+
+export const selectCompletedChest = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const chest = completed.filter((e) => e.bodyPart === "chest").length;
+    return chest;
+  }
+  return;
+};
+
+export const selectCompletedCardio = (reduxState) => {
+  if (reduxState.exercises.completed) {
+    const { completed } = reduxState.exercises;
+    // const sorted = completed.sort((a, b) => b.createdAt - a.createdAt);
+
+    const cardio = completed.filter((e) => e.bodyPart === "cardio").length;
+    return cardio;
+  }
+  return;
+};
