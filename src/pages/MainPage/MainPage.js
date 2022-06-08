@@ -22,6 +22,7 @@ import {
   Link,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 
@@ -76,11 +77,18 @@ export default function Homepage() {
     dispatch(addUserExercise(exercises[exercId].id));
   };
   const addFavourites = token ? (
-    <ThemeProvider theme={theme}>
-      <Button color="primary" onClick={onClickLike}>
-        Add to favourites <FavoriteIcon />
-      </Button>
-    </ThemeProvider>
+    <div className="buttons">
+      <ThemeProvider theme={theme}>
+        <Button color="primary" onClick={onClickLike}>
+          Add to favourites <FavoriteIcon />
+        </Button>
+      </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Button color="primary" onClick={onClickLike}>
+          Done <CheckCircleIcon />
+        </Button>
+      </ThemeProvider>
+    </div>
   ) : null;
 
   // console.log(exercises[exercId].id);
@@ -93,7 +101,28 @@ export default function Homepage() {
         </Link>
       </Button>
     </ThemeProvider>
-  ) : null;
+  ) : (
+    <p>
+      <ThemeProvider theme={theme}>
+        <Typography color="primary">
+          <Link href="/signup" className="custom-link">
+            {" "}
+            Create an account
+          </Link>
+        </Typography>
+      </ThemeProvider>{" "}
+      or
+      <ThemeProvider theme={theme}>
+        <Typography color="primary">
+          <Link href="/login" className="custom-link">
+            {" "}
+            Log in
+          </Link>
+        </Typography>
+      </ThemeProvider>{" "}
+      for a better experience and expanded functionality.
+    </p>
+  );
 
   return (
     <div className="page">
@@ -105,24 +134,6 @@ export default function Homepage() {
             For fitness lovers of all levels. Generate random exercises or a
             complete workout to make your fitness training more interesting.
             <p></p>
-            <ThemeProvider theme={theme}>
-              <Typography color="primary">
-                <Link href="/signup" className="custom-link">
-                  {" "}
-                  Create an account
-                </Link>
-              </Typography>
-            </ThemeProvider>{" "}
-            or
-            <ThemeProvider theme={theme}>
-              <Typography color="primary">
-                <Link href="/login" className="custom-link">
-                  {" "}
-                  Log in
-                </Link>
-              </Typography>
-            </ThemeProvider>{" "}
-            for a better experience and expanded functionality.
           </p>
           {workout}
         </div>

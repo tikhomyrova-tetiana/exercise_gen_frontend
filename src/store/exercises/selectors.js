@@ -50,3 +50,6 @@ export const selectCardioExercise = (reduxState) => {
 
 export const selectUserExercises = (reduxState) =>
   reduxState.exercises.favourites;
+
+export const selectCompletedExercises = (reduxState) =>
+  reduxState.exercises.completed;

@@ -5,6 +5,7 @@ const initialState = {
   exercises: [],
   repetition: [],
   favourites: [],
+  completed: [],
 };
 
 export const exerciseSlice = createSlice({
@@ -29,6 +30,13 @@ export const exerciseSlice = createSlice({
     addFavourites: (state, action) => {
       state.favourites = [...state.favourites, action.payload];
     },
+    completedFetched: (state, action) => {
+      state.completed = action.payload;
+      state.loading = false;
+    },
+    addCompleted: (state, action) => {
+      state.completed = [...state.completed, action.payload];
+    },
   },
 });
 
@@ -38,6 +46,8 @@ export const {
   repetitionFetched,
   favouritesFetched,
   addFavourites,
+  completedFetched,
+  addCompleted,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

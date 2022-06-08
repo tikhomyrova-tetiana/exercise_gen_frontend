@@ -5,6 +5,8 @@ import {
   repetitionFetched,
   addFavourites,
   favouritesFetched,
+  completedFetched,
+  addCompleted,
 } from "./slice";
 
 export async function fetchExercises(dispatch, getState) {
@@ -78,6 +80,28 @@ export async function fetchFavourites(dispatch, getState) {
     // axios.all(favourites.get)
 
     dispatch(favouritesFetched(relevantData));
+    dispatch(appDoneLoading());
+  } catch (error) {
+    console.log(error.message);
+    dispatch(appDoneLoading());
+  }
+}
+
+export async function fetchCompleted(dispatch, getState) {
+  try {
+    const { token } = getState().user;
+    dispatch(appLoading());
+
+    //getting the completed from backend
+    const response = await axios.get(
+      "http://localhost:4000/exercises/completed",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log("done", response);
+    const completed = response.data;
+    dispatch(completedFetched(completed));
     dispatch(appDoneLoading());
   } catch (error) {
     console.log(error.message);
