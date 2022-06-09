@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 50px auto;
+  margin: 60px auto;
 }
 
 .profile {
@@ -17,8 +17,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 250px;
+  max-height: 250px;
+  width: 100%;
   margin-right: 50px;
 }
 
@@ -40,4 +41,27 @@ h3 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.statisticsBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 40px auto 0;
+}
+
+.statisticsInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 5px auto;
+  max-width: 550px;
+}
+
+.human-body {
+  width: 207px;
+
+  display: block;
+  margin: 0 100px;
 }

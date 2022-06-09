@@ -1,7 +1,7 @@
 .page {
   display: flex;
-  /* flex-direction: column; */
-  align-items: baseline;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   flex-wrap: wrap;
   margin: 100px auto;
@@ -14,6 +14,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin: auto;
 }
 
 /* @media (max-width: 600px) {
@@ -39,11 +40,6 @@
   justify-content: space-around;
 }
 
-.exerciseInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .firstcolumn {
   display: flex;
@@ -63,7 +59,7 @@
 
 .text p {
   color: #00897b;
-  /* align: center; */
+  align-items: center;
 }
 
 .custom-link:hover {

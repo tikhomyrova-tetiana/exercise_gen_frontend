@@ -15,7 +15,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Workout from "./pages/Workout/Workout";
-const Other = () => <h1>Other</h1>;
+import Article from "./components/Article/Article";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function App() {
         {isLoading ? <Loading /> : null}
         <Routes>
           <Route exact path="/" element={<MainPage />} />
-          <Route path="/other" element={<Other />} />
+          <Route path="/other" element={<Article />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />

@@ -115,26 +115,28 @@ export default function Homepage() {
       </Button>
     </ThemeProvider>
   ) : (
-    <p>
-      <ThemeProvider theme={theme}>
-        <Typography color="primary">
-          <Link href="/signup" className="custom-link">
-            {" "}
-            Create an account
-          </Link>
-        </Typography>
-      </ThemeProvider>{" "}
-      or
-      <ThemeProvider theme={theme}>
-        <Typography color="primary">
-          <Link href="/login" className="custom-link">
-            {" "}
-            Log in
-          </Link>
-        </Typography>
-      </ThemeProvider>{" "}
-      for a better experience and expanded functionality.
-    </p>
+    <div>
+      <p align="center">
+        <ThemeProvider theme={theme}>
+          <Typography color="primary">
+            <Link href="/signup" className="custom-link">
+              {" "}
+              Create an account
+            </Link>
+          </Typography>
+        </ThemeProvider>{" "}
+        or
+        <ThemeProvider theme={theme}>
+          <Typography color="primary">
+            <Link href="/login" className="custom-link">
+              {" "}
+              Log in
+            </Link>
+          </Typography>
+        </ThemeProvider>{" "}
+        for a better experience and expanded functionality.
+      </p>
+    </div>
   );
 
   return (

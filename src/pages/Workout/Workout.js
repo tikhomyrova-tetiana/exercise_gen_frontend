@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { selectToken } from "../../store/user/selectors";
+// import { selectToken } from "../../store/user/selectors";
 import {
   selectExercises,
   selectRepetitions,
@@ -131,21 +131,6 @@ export default function Workout() {
     setReps5Id(diceTime);
     setReps6Id(diceTime);
   };
-
-  //   const onClickLike = (event) => {
-  //     event.preventDefault();
-  //     dispatch(fetchFavourites);
-  //     dispatch(addUserExercise(exercises[exercId].id));
-  //   };
-  //   const addFavourites = token ? (
-  //     <ThemeProvider theme={theme}>
-  //       <Button color="primary" onClick={onClickLike}>
-  //         Add to favourites <FavoriteIcon />
-  //       </Button>
-  //     </ThemeProvider>
-  //   ) : null;
-
-  // console.log(exercises[exercId].id);
 
   return (
     <div className="pageworkout">

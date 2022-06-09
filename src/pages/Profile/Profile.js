@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import moment from "moment";
+import chroma from "chroma-js";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { selectToken } from "../../store/user/selectors";
@@ -24,7 +25,9 @@ import {
   Button,
   CardContent,
   Typography,
-  CardMedia,
+  Table,
+  TableHead,
+  TableRow,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
@@ -34,6 +37,9 @@ import {
   fetchExercises,
   fetchCompleted,
 } from "../../store/exercises/thunk";
+import BodyView from "../../components/BodyView/BodyView";
+import Statistics from "../../components/Statistics/Statistics";
+import Favourites from "../../components/Favourites/Favourites";
 
 const Img = styled("img")({
   margin: "auto",
@@ -177,9 +183,9 @@ export default function Profile() {
         <div>
           <div className="info">
             <h3>Personal information</h3>
-            <InputLabel>Your Name: {user?.name}</InputLabel>
+            <InputLabel color="primary">Your Name: {user?.name}</InputLabel>
             <TextField
-              sx={{ maxWidth: "250px" }}
+              sx={{ maxWidth: "250px", margin: "5px 0" }}
               id="outlined-textarea"
               label="Name"
               placeholder="Name"
@@ -189,7 +195,7 @@ export default function Profile() {
             ></TextField>
             <InputLabel>Email: {user?.email}</InputLabel>
             <TextField
-              sx={{ maxWidth: "250px" }}
+              sx={{ maxWidth: "250px", margin: "5px 0" }}
               id="outlined-textarea"
               label="Email"
               placeholder="Email"
@@ -200,7 +206,7 @@ export default function Profile() {
             <InputLabel>Age: {user?.age}</InputLabel>
 
             <TextField
-              sx={{ maxWidth: "250px" }}
+              sx={{ maxWidth: "250px", margin: "5px 0" }}
               id="outlined-textarea"
               label="Age"
               placeholder="Age"
@@ -210,7 +216,7 @@ export default function Profile() {
             ></TextField>
             <InputLabel>Gender: {user?.gender}</InputLabel>
             <TextField
-              sx={{ maxWidth: "250px" }}
+              sx={{ maxWidth: "250px", margin: "5px 0" }}
               id="outlined-select-gender"
               select
               size="small"
@@ -267,88 +273,114 @@ export default function Profile() {
       </div>
       <div className="fav">
         {!favourites.length
-          ? "You didn't like any exercise"
+          ? "You didn't like any exercises"
           : favourites.map((ex) => (
-              <div className="exerciseInfo">
-                <CardContent>
-                  <ThemeProvider theme={theme}>
-                    <Typography variant="h6" color="secondary">
-                      {ex.name}
-                    </Typography>
-                    <Typography variant="body1" color="secondary">
-                      {ex.bodyPart}
-                    </Typography>
-                  </ThemeProvider>
-                </CardContent>
-                <CardMedia
-                  image={ex.gifUrl}
-                  alt="name"
-                  sx={{
-                    maxHeight: "360px",
-                    maxWidth: "360px",
-                    minHeight: "360px",
-                    minWidth: "360px",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                ></CardMedia>
-              </div>
+              <Favourites
+                key={ex.id}
+                name={ex.name}
+                bodyPart={ex.bodyPart}
+                gif={ex.gifUrl}
+              />
             ))}
       </div>
       <div>
         <h3>Statistics</h3>
       </div>
       <div>
-        {!completed.length
-          ? "You haven't accomplished any exercises yet"
-          : completed.map((e) => (
-              <div>
-                <CardContent>
-                  <ThemeProvider theme={theme}>
-                    <Typography variant="h6" color="secondary">
-                      {e.name}
-                    </Typography>
-                    <Typography variant="body1" color="secondary">
-                      {e.bodyPart}
-                    </Typography>
-                    <Typography variant="body1" color="secondary">
-                      {moment(e.createdAt).format("MMM Do YY")}
-                    </Typography>
-                  </ThemeProvider>
-                </CardContent>
-              </div>
-            ))}
+        <div className="statisticsInfo">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <th align="left">Exercise</th>
+                <th align="left">Body Part</th>
+                <th align="right">Date</th>
+              </TableRow>
+            </TableHead>
+            {!completed.length
+              ? "You haven't accomplished any exercises yet"
+              : completed.map((e) => (
+                  // <Statistics
+                  //   key={e.id}
+                  //   name={e.name.toUpperCase()}
+                  //   bodyPart={e.bodyPart}
+                  //   date={moment(e.createdAt).format("MMM Do YY")}
+                  // />
+                  <Statistics
+                    key={e.id}
+                    name={e.name.toUpperCase()}
+                    bodyPart={e.bodyPart}
+                    date={moment(e.createdAt).format("MMM Do YY")}
+                  />
+                ))}
+          </Table>
+        </div>
         {!completed.length ? null : (
-          <div>
-            <CardContent>
-              <ThemeProvider theme={theme}>
-                <Typography variant="h6" color="secondary">
-                  Arms exercises completed {arms} -{" "}
-                  {Math.round((arms / completed.length) * 100)} %
-                </Typography>
-                <Typography variant="h6" color="secondary">
-                  Legs exercises completed {legs} -{" "}
-                  {Math.round((legs / completed.length) * 100)} %
-                </Typography>
-                <Typography variant="h6" color="secondary">
-                  Chest exercises completed {chest} -{" "}
-                  {Math.round((chest / completed.length) * 100)} %
-                </Typography>
+          <div className="statisticsBody">
+            <div>
+              <CardContent>
+                <ThemeProvider theme={theme}>
+                  <Typography variant="h6" color="secondary">
+                    Arms exercises completed {arms} -{" "}
+                    {Math.round((arms / completed.length) * 100)} %
+                  </Typography>
+                  <Typography variant="h6" color="secondary">
+                    Legs exercises completed {legs} -{" "}
+                    {Math.round((legs / completed.length) * 100)} %
+                  </Typography>
+                  <Typography variant="h6" color="secondary">
+                    Chest exercises completed {chest} -{" "}
+                    {Math.round((chest / completed.length) * 100)} %
+                  </Typography>
 
-                <Typography variant="h6" color="secondary">
-                  Back exercises completed {back} -{" "}
-                  {Math.round((back / completed.length) * 100)} %
-                </Typography>
-                <Typography variant="h6" color="secondary">
-                  Waist exercises completed {waist} -{" "}
-                  {Math.round((waist / completed.length) * 100)} %
-                </Typography>
-                <Typography variant="h6" color="secondary">
-                  Cardio exercises completed {cardio} -{" "}
-                  {Math.round((cardio / completed.length) * 100)} %
-                </Typography>
-              </ThemeProvider>
-            </CardContent>
+                  <Typography variant="h6" color="secondary">
+                    Back exercises completed {back} -{" "}
+                    {Math.round((back / completed.length) * 100)} %
+                  </Typography>
+                  <Typography variant="h6" color="secondary">
+                    Waist exercises completed {waist} -{" "}
+                    {Math.round((waist / completed.length) * 100)} %
+                  </Typography>
+                  <Typography variant="h6" color="secondary">
+                    Cardio exercises completed {cardio} -{" "}
+                    {Math.round((cardio / completed.length) * 100)} %
+                  </Typography>
+                </ThemeProvider>
+              </CardContent>
+            </div>
+            <div class="human-body">
+              <BodyView
+                waistFrontColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((waist / completed.length) * 100)
+                  ]
+                }
+                armsColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((arms / completed.length) * 100)
+                  ]
+                }
+                legsColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((legs / completed.length) * 100)
+                  ]
+                }
+                chestColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((chest / completed.length) * 100)
+                  ]
+                }
+                backColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((back / completed.length) * 100)
+                  ]
+                }
+                heartColor={
+                  chroma.scale(["white", "#00e676"]).mode("lch").colors(100)[
+                    Math.round((cardio / completed.length) * 100)
+                  ]
+                }
+              />
+            </div>
           </div>
         )}
       </div>
