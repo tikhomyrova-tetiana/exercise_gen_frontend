@@ -31,11 +31,13 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { updateUser } from "../../store/user/actions";
 import {
   fetchFavourites,
   fetchExercises,
   fetchCompleted,
+  deleteUserExercise,
 } from "../../store/exercises/thunk";
 import BodyView from "../../components/BodyView/BodyView";
 import Statistics from "../../components/Statistics/Statistics";
@@ -81,7 +83,7 @@ export default function Profile() {
   const [gender, setGender] = useState("");
   // const [password, setPassword] = useState("");
   const genders = [{ value: "female" }, { value: "male" }, { value: "other" }];
-  console.log("bahjbajbak", favourites);
+  console.log("favourites", favourites);
   console.log("completed", completed);
   console.log(arms, legs, waist, back, chest, cardio);
 
@@ -111,6 +113,10 @@ export default function Profile() {
 
   const handleChangeGender = (event) => {
     setGender(event.target.value);
+  };
+
+  const onClickUnlike = (id) => {
+    dispatch(deleteUserExercise(id));
   };
 
   const submit = (event) => {
@@ -275,12 +281,24 @@ export default function Profile() {
         {!favourites.length
           ? "You didn't like any exercises"
           : favourites.map((ex) => (
-              <Favourites
-                key={ex.id}
-                name={ex.name}
-                bodyPart={ex.bodyPart}
-                gif={ex.gifUrl}
-              />
+              <div>
+                <Favourites
+                  key={ex.id}
+                  name={ex.name}
+                  bodyPart={ex.bodyPart}
+                  gif={ex.gifUrl}
+                  btn={
+                    <ThemeProvider theme={theme}>
+                      <Button
+                        color="primary"
+                        onClick={() => onClickUnlike(ex.id)}
+                      >
+                        Remove from favourites <HeartBrokenIcon />
+                      </Button>
+                    </ThemeProvider>
+                  }
+                />
+              </div>
             ))}
       </div>
       <div>

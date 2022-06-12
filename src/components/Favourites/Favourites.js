@@ -18,7 +18,7 @@ const theme = createTheme({
 });
 
 export default function Favourites(props) {
-  const { name, bodyPart, gif } = props;
+  const { name, bodyPart, gif, btn } = props;
   return (
     <div className="exerciseInfo">
       <CardContent>
@@ -43,6 +43,7 @@ export default function Favourites(props) {
           width: "100%",
         }}
       ></CardMedia>
+      {btn}
     </div>
   );
 }

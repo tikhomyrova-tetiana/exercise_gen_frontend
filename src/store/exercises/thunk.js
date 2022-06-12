@@ -7,6 +7,7 @@ import {
   favouritesFetched,
   completedFetched,
   addCompleted,
+  deleteFavourites,
 } from "./slice";
 
 export async function fetchExercises(dispatch, getState) {
@@ -124,6 +125,27 @@ export const addUserExercise = (apiId) => async (dispatch, getState) => {
       // add Auth headers (token)
     );
     dispatch(addFavourites(userFav.data));
+    dispatch(appDoneLoading());
+  } catch (error) {
+    console.log(error.message);
+    dispatch(appDoneLoading());
+  }
+};
+
+export const deleteUserExercise = (apiId) => async (dispatch, getState) => {
+  try {
+    const { token } = getState().user;
+    dispatch(appLoading());
+    const userFav = await axios.delete(
+      `http://localhost:4000/exercises/favourites/${apiId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("delete thunk", userFav.data);
+    dispatch(deleteFavourites(apiId));
     dispatch(appDoneLoading());
   } catch (error) {
     console.log(error.message);

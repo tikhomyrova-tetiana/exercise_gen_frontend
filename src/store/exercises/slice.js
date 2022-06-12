@@ -37,6 +37,10 @@ export const exerciseSlice = createSlice({
     addCompleted: (state, action) => {
       state.completed = [...state.completed, action.payload];
     },
+    deleteFavourites: (state, action) => {
+      const apiId = action.payload;
+      state.favourites = state.favourites.filter((fav) => fav.id !== apiId);
+    },
   },
 });
 
@@ -48,6 +52,7 @@ export const {
   addFavourites,
   completedFetched,
   addCompleted,
+  deleteFavourites,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;
