@@ -332,33 +332,41 @@ export default function Profile() {
                 ))}
           </Table>
         </div>
+        <div>
+          <ThemeProvider theme={theme}>
+            <Typography variant="h5" color="secondary">
+              Check which body part you work on the most:{" "}
+            </Typography>
+          </ThemeProvider>
+        </div>
+
         {!completed.length ? null : (
           <div className="statisticsBody">
             <div>
               <CardContent>
                 <ThemeProvider theme={theme}>
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Arms exercises completed {arms} -{" "}
                     {Math.round((arms / completed.length) * 100)} %
                   </Typography>
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Legs exercises completed {legs} -{" "}
                     {Math.round((legs / completed.length) * 100)} %
                   </Typography>
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Chest exercises completed {chest} -{" "}
                     {Math.round((chest / completed.length) * 100)} %
                   </Typography>
 
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Back exercises completed {back} -{" "}
                     {Math.round((back / completed.length) * 100)} %
                   </Typography>
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Waist exercises completed {waist} -{" "}
                     {Math.round((waist / completed.length) * 100)} %
                   </Typography>
-                  <Typography variant="h6" color="secondary">
+                  <Typography variant="body1" color="secondary">
                     Cardio exercises completed {cardio} -{" "}
                     {Math.round((cardio / completed.length) * 100)} %
                   </Typography>

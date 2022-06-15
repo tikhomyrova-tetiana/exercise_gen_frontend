@@ -1,3 +1,4 @@
+import "./styles.css";
 import {
   AppBar,
   Toolbar,
@@ -30,7 +31,7 @@ function Header() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <AppBar position="static" theme={theme}>
+    <AppBar position="static" theme={theme} style={{ width: "100%" }} fill>
       <Toolbar className="header">
         <div>
           <SportsGymnasticsIcon viewBox="0 0 24 30" fontSize="large" />
@@ -48,7 +49,7 @@ function Header() {
             </Link>
           </Typography>
         </div>
-        <div>
+        <div className="headerButtons">
           <Button color="inherit">
             <Link
               href="/"

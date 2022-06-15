@@ -1,13 +1,22 @@
-.cards {
-  display: flex;
-  flex-direction: row;
-}
-
 .pageworkout {
   display: flex;
-  align-items: baseline;
-  width: max-content;
+  align-items: center;
+  /* width: max-content; */
   flex-wrap: wrap;
   margin: 30px auto;
   padding: 0;
+}
+
+.genpart {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
 }

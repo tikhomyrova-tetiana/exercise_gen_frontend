@@ -11,16 +11,19 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
 }
 .photo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   max-width: 250px;
   max-height: 250px;
   width: 100%;
-  margin-right: 50px;
+  margin-right: 20px;
+  margin-bottom: 70px;
 }
 
 .photo Img {
@@ -31,6 +34,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   margin-bottom: 50px;
+  margin-left: 20px;
 }
 
 h3 {
@@ -48,7 +52,7 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 40px auto 0;
+  margin: 10px auto 0;
 }
 
 .statisticsInfo {
@@ -56,7 +60,7 @@ h3 {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 5px auto;
+  margin: 5px auto 40px;
   max-width: 550px;
 }
 
@@ -64,5 +68,5 @@ h3 {
   width: 207px;
 
   display: block;
-  margin: 0 100px;
+  margin: 0 0 0 50px;
 }
