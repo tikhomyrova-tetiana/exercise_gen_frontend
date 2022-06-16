@@ -15,7 +15,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Workout from "./pages/Workout/Workout";
-import Article from "./components/Article/Article";
+import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function App() {
         {isLoading ? <Loading /> : null}
         <Routes>
           <Route exact path="/" element={<MainPage />} />
-          <Route path="/other" element={<Article />} />
+          <Route path="/other" element={<CategoriesPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />

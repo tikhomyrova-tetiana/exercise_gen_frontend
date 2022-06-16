@@ -29,6 +29,16 @@ function Header() {
   const token = useSelector(selectToken);
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const categories = token ? (
+    <Link
+      href="/other"
+      color="inherit"
+      underline="none"
+      className="custom-link"
+    >
+      Learn more
+    </Link>
+  ) : null;
 
   return (
     <AppBar position="static" theme={theme} style={{ width: "100%" }} fill>
@@ -61,16 +71,7 @@ function Header() {
               Home
             </Link>
           </Button>
-          <Button color="inherit">
-            <Link
-              href="/other"
-              color="inherit"
-              underline="none"
-              className="custom-link"
-            >
-              Learn more
-            </Link>
-          </Button>
+          <Button color="inherit">{categories}</Button>
         </div>
         <div className="loggedin">
           <Button color="inherit">
