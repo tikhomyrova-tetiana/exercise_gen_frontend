@@ -26,6 +26,13 @@ On your profile page, you can change all personal info. You can see exercises yo
 
 <img src="https://media.giphy.com/media/f7k7WMM2rahSQG2J9h/giphy.gif" alt="third" width="500px" />
 
+You can also generate a full-body workout, which will contain exercises for each body part.
+
+<img src="https://media.giphy.com/media/iQjvli62186Lb058ly/giphy.gif" alt="fourth" width="500px" />
+
+The part I'm still working on. After you have studied your body heat map, you may want to complete a task on a specific body part. Now you can generate the desired exercise, the part to be finalized is to add this exercise to the statistics.
+
+<img src="https://media.giphy.com/media/784rh9kzsUOPEusVqW/giphy.gif" alt="fifth" width="500px" />
 
 ### Wireframes
 
