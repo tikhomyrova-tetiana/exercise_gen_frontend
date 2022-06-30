@@ -27,6 +27,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import GenerateButton from "../../components/GenerateButton/GenerateButton";
 
 const theme = createTheme({
   status: {
@@ -192,11 +193,7 @@ export default function Homepage() {
                 </ThemeProvider>
               </Grid>
               <div>
-                <ThemeProvider theme={theme}>
-                  <Button color="primary" variant="outlined" onClick={onClick}>
-                    Generate
-                  </Button>
-                </ThemeProvider>
+                <GenerateButton click={onClick} />
               </div>
             </div>
           </div>

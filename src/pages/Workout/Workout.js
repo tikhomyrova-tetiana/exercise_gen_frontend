@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-// import { selectToken } from "../../store/user/selectors";
 import {
   selectExercises,
   selectRepetitions,
@@ -13,36 +12,9 @@ import {
   selectLegsExercise,
   selectWaistExercise,
 } from "../../store/exercises/selectors";
-import {
-  fetchExercises,
-  fetchRepetitions,
-  //   addUserExercise,
-  //   fetchFavourites,
-} from "../../store/exercises/thunk";
-import {
-  Grid,
-  Button,
-  CardMedia,
-  CardContent,
-  Typography,
-} from "@mui/material";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@emotion/react";
-
-const theme = createTheme({
-  status: {
-    danger: "#e53e3e",
-  },
-  palette: {
-    primary: {
-      main: "#00695c",
-    },
-    secondary: {
-      main: "#004d40",
-    },
-  },
-});
+import { fetchExercises, fetchRepetitions } from "../../store/exercises/thunk";
+import ExerciseCard from "../../components/ExerciseCard/ExerciseCard";
+import GenerateButton from "../../components/GenerateButton/GenerateButton";
 
 export default function Workout() {
   const dispatch = useDispatch();
@@ -89,32 +61,32 @@ export default function Workout() {
   const diceArmsExer = (min, max) => {
     min = 1;
     max = arms.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   const diceBackExer = (min, max) => {
     min = 1;
     max = back.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   const diceWaistExer = (min, max) => {
     min = 1;
     max = waist.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   const diceChestExer = (min, max) => {
     min = 1;
     max = chest.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   const diceCardioExer = (min, max) => {
     min = 1;
     max = cardio.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   const diceTime = (min, max) => {
     min = 1;
     max = repetitions.length - 1;
-    return Math.floor(Math.random() * (max - min + 1) + min); //Максимум и минимум включаются
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
   const onClick = () => {
@@ -132,239 +104,77 @@ export default function Workout() {
     setReps6Id(diceTime);
   };
 
-  return (
+  return !exercises.length ? (
+    "Loading"
+  ) : (
     <div className="pageworkout">
       <div className="mainpart">
-        {!exercises.length ? (
-          "Loading"
-        ) : (
-          <div className="genpart">
-            <div className="firstcolumn">
-              <div className="cards">
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {arms[armsExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {arms[armsExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={arms[armsExercId].gifUrl}
-                    alt={arms[armsExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps1Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {legs[legsExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {legs[legsExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={legs[legsExercId].gifUrl}
-                    alt={legs[legsExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps2Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {waist[waistExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {waist[waistExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={waist[waistExercId].gifUrl}
-                    alt={waist[waistExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps3Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
+        <div className="genpart">
+          <div className="firstcolumn">
+            <div className="cards">
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={arms[armsExercId].id}
+                  name={arms[armsExercId].name}
+                  bodyPart={arms[armsExercId].bodyPart}
+                  image={arms[armsExercId].gifUrl}
+                  reps={repetitions[reps1Id].time}
+                />
               </div>
-              <div className="cards">
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {back[backExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {back[backExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={back[backExercId].gifUrl}
-                    alt={back[backExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps4Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {chest[chestExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {chest[chestExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={chest[chestExercId].gifUrl}
-                    alt={chest[chestExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps5Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
-                <div className="exerciseInfo">
-                  <CardContent>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="p" color="secondary">
-                        {cardio[cardioExercId].name.toUpperCase()}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="secondary"
-                        align="center"
-                      >
-                        {cardio[cardioExercId].bodyPart}
-                      </Typography>
-                    </ThemeProvider>
-                  </CardContent>
-                  <CardMedia
-                    image={cardio[cardioExercId].gifUrl}
-                    alt={cardio[cardioExercId].name}
-                    sx={{
-                      maxHeight: "360px",
-                      maxWidth: "360px",
-                      minHeight: "250px",
-                      minWidth: "250px",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></CardMedia>
-                  <Grid item sx={{ maxWidth: "370px" }}>
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h6" color="secondary">
-                        <CardContent>{repetitions[reps6Id]?.time}</CardContent>
-                      </Typography>
-                    </ThemeProvider>
-                  </Grid>
-                </div>
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={legs[legsExercId].id}
+                  name={legs[legsExercId].name}
+                  bodyPart={legs[legsExercId].bodyPart}
+                  image={legs[legsExercId].gifUrl}
+                  reps={repetitions[reps2Id]?.time}
+                />
               </div>
-              {/* {addFavourites} */}
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={waist[waistExercId].id}
+                  name={waist[waistExercId].name}
+                  bodyPart={waist[waistExercId].bodyPart}
+                  image={waist[waistExercId].gifUrl}
+                  reps={repetitions[reps3Id]?.time}
+                />
+              </div>
             </div>
-            <div className="secondcolumn">
-              <ThemeProvider theme={theme}>
-                <Button color="primary" variant="outlined" onClick={onClick}>
-                  Generate
-                </Button>
-              </ThemeProvider>
+            <div className="cards">
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={back[backExercId].id}
+                  name={back[backExercId].name}
+                  bodyPart={back[backExercId].bodyPart}
+                  image={back[backExercId].gifUrl}
+                  reps={repetitions[reps4Id]?.time}
+                />
+              </div>
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={chest[chestExercId].id}
+                  name={chest[chestExercId].name}
+                  bodyPart={chest[chestExercId].bodyPart}
+                  image={chest[chestExercId].gifUrl}
+                  reps={repetitions[reps5Id]?.time}
+                />
+              </div>
+              <div className="exerciseInfo">
+                <ExerciseCard
+                  key={cardio[cardioExercId].id}
+                  name={cardio[cardioExercId].name}
+                  bodyPart={cardio[cardioExercId].bodyPart}
+                  image={cardio[cardioExercId].gifUrl}
+                  reps={repetitions[reps6Id]?.time}
+                />
+              </div>
             </div>
+            {/* {addFavourites} */}
           </div>
-        )}
+          <div className="secondcolumn">
+            <GenerateButton click={onClick} />
+          </div>
+        </div>
       </div>
     </div>
   );

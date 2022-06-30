@@ -317,12 +317,6 @@ export default function Profile() {
             {!completed.length
               ? "You haven't accomplished any exercises yet"
               : completed.map((e) => (
-                  // <Statistics
-                  //   key={e.id}
-                  //   name={e.name.toUpperCase()}
-                  //   bodyPart={e.bodyPart}
-                  //   date={moment(e.createdAt).format("MMM Do YY")}
-                  // />
                   <Statistics
                     key={e.id}
                     name={e.name.toUpperCase()}
