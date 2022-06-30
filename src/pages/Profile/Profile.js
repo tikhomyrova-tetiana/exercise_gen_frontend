@@ -42,7 +42,6 @@ import {
 import BodyView from "../../components/BodyView/BodyView";
 import Statistics from "../../components/Statistics/Statistics";
 import Favourites from "../../components/Favourites/Favourites";
-import CheckButton from "../../components/CheckButton/CheckButton";
 
 const Img = styled("img")({
   margin: "auto",
@@ -289,11 +288,6 @@ export default function Profile() {
                   bodyPart={ex.bodyPart}
                   gif={ex.gifUrl}
                   btn={
-                    // <CheckButton
-                    //   click={onClickUnlike(ex.id)}
-                    //   text={"Remove from favourites"}
-                    //   icon={<HeartBrokenIcon />}
-                    // />
                     <ThemeProvider theme={theme}>
                       <Button
                         color="primary"
